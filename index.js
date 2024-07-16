@@ -17,6 +17,10 @@ app.use(cors());
 io.on("connection", (socket) => {
   console.log("a user connected");
 
+  socket.on("startLivestream", (userId) => {
+    socket.join(userId); // Join room based on user's ID
+  });
+
   socket.on("sendMessage", (message) => {
     io.emit("receiveMessage", message);
   });
